@@ -76,13 +76,6 @@ const store = new Vuex.Store({
             });
             return results;
         },
-        scoreCardValuesForNumbers: state => {
-            let results = [];
-            state.scoreCard.forEach(s => {
-                if (s.id < 7) results.push(s.value);
-            });
-            return results;
-        },
         calculateTotalScore: (state, getters) => {
             if (getters.scoreCardValues.length != 0)
                 result = getters.scoreCardValues.reduce(
@@ -91,52 +84,6 @@ const store = new Vuex.Store({
 
             return result;
         },
-        calculatePartialScore: (state, getters) => {
-            let result = 0;
-            if (getters.scoreCardValues.length != 0)
-                result = getters.scoreCardValuesForNumbers.reduce(
-                    (partial_sum, a) => partial_sum + a
-                );
-
-            return result;
-        },
-        calculatePairs: (state, getters) => {
-            var results = 0;
-            for (var i = 0; i < getters.sortByDesDice.length - 1; i++) {
-                if (getters.sortByDesDice[i + 1] == getters.sortByDesDice[i]) {
-                    results = getters.sortByDesDice[i];
-                    break;
-                }
-            }
-            return results * 2;
-        },
-        calculateThreeOfAKind: (state, getters) => {
-            var results = 0;
-            for (var i = 0; i < getters.sortByDesDice.length - 1; i++) {
-                if (
-                    getters.sortByDesDice[i + 1] == getters.sortByDesDice[i] &&
-                    getters.sortByDesDice[i + 2] == getters.sortByDesDice[i + 1]
-                ) {
-                    results = getters.sortByDesDice[i];
-                    break;
-                }
-            }
-            return results * 3;
-        },
-        calculateFourOfAKind: (state, getters) => {
-            var results = 0;
-            for (var i = 0; i < getters.sortByDesDice.length - 1; i++) {
-                if (getters.sortByDesDice[i + 3] == getters.sortByDesDice[i]) {
-                    results = getters.sortByDesDice[i];
-                    break;
-                }
-            }
-            return results * 4;
-        },
-        calculateChance: (state, getters) => {
-            let array = getters.diceValues;
-            return array.reduce((partial_sum, a) => partial_sum + a);
-        }
     },
     mutations: {
         initScoreCard(state) {
