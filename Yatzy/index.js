@@ -35,13 +35,6 @@ const store = new Vuex.Store({
             });
             return sortedArray;
         },
-        sortByAscDice: (state, getters) => {
-            let sortedArray = [];
-            sortedArray = getters.diceValues.slice().sort(function(a, b) {
-                return a - b;
-            });
-            return sortedArray;
-        },
         calculateAggregate: (state, getters) => {
             let aggregate = [];
             let current = null;
@@ -450,7 +443,7 @@ const Item = {
     template: `
          <div v-bind:class="classObject" v-on:click="toggleLockToScoreCard">
           <div v-if="!isInfo" class="fi">{{it.field}}</div>
-          <div v-else-if="isInfo">Få 63p i den här kolumnen för att få en extra 50p bonus!</div>
+          <div v-else-if="isInfo"></div>
  
           <div v-if="!isInfo" v-bind:class="classObjectSubItem">{{displayScore}}</div>
           
